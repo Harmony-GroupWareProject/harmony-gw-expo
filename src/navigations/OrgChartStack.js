@@ -15,9 +15,7 @@ const OrgChartStack = () => {
       <Stack.Screen
         name="EmpDetail"
         component={EmpDetailScreen}
-        options={({ route }) => ({
-          title: `${route.params.empData.empName}님의 정보`,
-        })}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

@@ -60,7 +60,7 @@ export default function OrgChartScreen() {
             title: `${emp.empName} (${emp.position})`,
             key: emp.empNo,
             isOrg: false,
-            empData: emp,
+            empData: { ...emp, orgName: org.title },
           });
         }
       });
