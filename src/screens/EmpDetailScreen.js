@@ -1,17 +1,44 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Linking,
+  NativeModules,
+} from 'react-native';
 import {
   MaterialCommunityIcons,
   MaterialIcons,
   FontAwesome6,
+  Feather,
 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 
+const { ContactModule } = NativeModules;
+
 const EmpDetailScreen = ({ route }) => {
   const { empData } = route.params;
   const navigation = useNavigation();
-  console.log(empData);
+  // 전화 걸기 함수
+  const makePhoneCall = phoneNumber => {
+    Linking.openURL(`tel:${phoneNumber}`);
+  };
+
+  // 문자 보내기 함수
+  const sendMessage = phoneNumber => {
+    Linking.openURL(`sms:${phoneNumber}`);
+  };
+
+  const openAddContactScreen = () => {
+    ContactModule.addContact(
+      empData.empName,
+      empData.phoneNum,
+      empData.email,
+      empData.orgName,
+      empData.position
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -25,17 +52,23 @@ const EmpDetailScreen = ({ route }) => {
         <Text style={styles.name}>{empData.empName}</Text>
       </View>
       <View style={styles.iconContainer}>
-        <TouchableOpacity style={styles.iconButton}>
-          <MaterialCommunityIcons name="phone" size={24} color="green" />
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={() => makePhoneCall(empData.phoneNum)}
+        >
+          <FontAwesome6 name="phone" size={24} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton}>
-          <MaterialCommunityIcons name="message" size={24} color="blue" />
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={() => sendMessage(empData.phoneNum)}
+        >
+          <MaterialCommunityIcons name="message" size={24} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton}>
-          <MaterialCommunityIcons name="video" size={24} color="green" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton}>
-          <MaterialCommunityIcons name="email" size={24} color="gray" />
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={openAddContactScreen}
+        >
+          <Feather name="share" size={24} color="white" />
         </TouchableOpacity>
       </View>
       <View style={styles.infoContainer}>
@@ -94,7 +127,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   iconButton: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: 'orange',
     borderRadius: 50,
     padding: 15,
     alignItems: 'center',

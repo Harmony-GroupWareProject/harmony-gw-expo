@@ -4,12 +4,16 @@ import { ip } from './global-variable';
 export const fetchScheduleList = async () => {
   try {
     const userToken = await SecureStore.getItemAsync('userToken');
+    const empNo = await SecureStore.getItemAsync('empNo');
     console.log(userToken);
-    const response = await fetch(`http://${ip}:9000/scheduleList`, {
-      headers: {
-        Authorization: userToken,
-      },
-    });
+    const response = await fetch(
+      `http://${ip}:9000/personalScheduleList?empNo=${empNo}`,
+      {
+        headers: {
+          Authorization: userToken,
+        },
+      }
+    );
 
     const data = await response.json();
     console.log(data);
@@ -22,6 +26,7 @@ export const fetchScheduleList = async () => {
 export const fetchSaveSchedule = async newEvent => {
   try {
     const userToken = await SecureStore.getItemAsync('userToken');
+    const empNo = await SecureStore.getItemAsync('empNo');
     console.log(userToken);
 
     // POST 요청을 위해 fetch 호출을 수정합니다.
@@ -31,7 +36,7 @@ export const fetchSaveSchedule = async newEvent => {
         'Content-Type': 'application/json',
         Authorization: userToken,
       },
-      body: JSON.stringify(newEvent), // newEvent를 요청 본문에 포함시킵니다.
+      body: JSON.stringify({ ...newEvent, empNo: empNo, scheduleType: 2 }), // newEvent를 요청 본문에 포함시킵니다.
     });
 
     const data = await response.json();

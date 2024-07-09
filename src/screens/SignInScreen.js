@@ -34,7 +34,9 @@ const SignInScreen = () => {
           setIsLoading(false);
           setUser(data);
         } catch (error) {
-          Alert.alert('로그인 실패', error, [{ text: '확인', onPress: () => setIsLoading(false) }]);
+          Alert.alert('로그인 실패', error, [
+            { text: '확인', onPress: () => setIsLoading(false) },
+          ]);
         }
       }
     }
@@ -42,8 +44,16 @@ const SignInScreen = () => {
 
   return (
     <SafeInputView>
-      <View style={[styles.container, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
-        <Image source={require('../../assets/login.png')} style={styles.image} />
+      <View
+        style={[
+          styles.container,
+          { paddingTop: insets.top, paddingBottom: insets.bottom },
+        ]}
+      >
+        <Image
+          source={require('../../assets/login.png')}
+          style={styles.image}
+        />
 
         <Input
           title={'사원번호'}
@@ -66,7 +76,12 @@ const SignInScreen = () => {
         />
 
         <View style={styles.buttonContainer}>
-          <Button title="로그인" onPress={onSubmit} disabled={disabled} isLoading={isLoading} />
+          <Button
+            title="로그인"
+            onPress={onSubmit}
+            disabled={disabled}
+            isLoading={isLoading}
+          />
         </View>
       </View>
     </SafeInputView>
