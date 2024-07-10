@@ -90,6 +90,34 @@ export default function OrgChartScreen() {
     setExpandedNodes(prevState => ({ ...prevState, [key]: !prevState[key] }));
   };
 
+  const likeSearch = (obj, query) => {
+    for (let key in obj) {
+      if (typeof obj[key] === 'string' && obj[key].includes(query)) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const filterTree = (nodes, query) => {
+    return nodes
+      .map(node => {
+        if (node.isOrg) {
+          const filteredChildren = filterTree(node.children, query);
+          if (filteredChildren.length > 0 || node.title.includes(query)) {
+            return { ...node, children: filteredChildren };
+          }
+        } else if (
+          node.title.includes(query) ||
+          likeSearch(node.empData, query)
+        ) {
+          return node;
+        }
+        return null;
+      })
+      .filter(node => node !== null);
+  };
+
   const renderTree = (nodes, level = 0) => {
     return nodes.map(node => (
       <View
@@ -105,9 +133,19 @@ export default function OrgChartScreen() {
           style={styles.nodeContent}
         >
           {node.isOrg ? (
-            <Avatar.Icon size={24} icon="folder" />
+            <Avatar.Icon
+              size={24}
+              icon="folder"
+              color="white"
+              style={{ backgroundColor: 'orange' }}
+            />
           ) : (
-            <Avatar.Icon size={24} icon="account" />
+            <Avatar.Icon
+              size={24}
+              icon="account"
+              color="white"
+              style={{ backgroundColor: 'orange' }}
+            />
           )}
           <Text style={styles.nodeText}>{node.title}</Text>
         </TouchableOpacity>
@@ -122,10 +160,12 @@ export default function OrgChartScreen() {
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="orange" />
       </View>
     );
   }
+
+  const filteredTreeData = filterTree(treeData, search);
 
   return (
     <View style={styles.container}>
@@ -135,7 +175,7 @@ export default function OrgChartScreen() {
         onChangeText={text => setSearch(text)}
         style={styles.search}
       />
-      <ScrollView>{renderTree(treeData)}</ScrollView>
+      <ScrollView>{renderTree(filteredTreeData)}</ScrollView>
     </View>
   );
 }
@@ -147,6 +187,7 @@ const styles = StyleSheet.create({
   },
   search: {
     margin: 10,
+    backgroundColor: '',
   },
   nodeContainer: {
     flexDirection: 'column',

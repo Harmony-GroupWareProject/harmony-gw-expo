@@ -217,18 +217,30 @@ const CalendarForm = ({ scheduleList, setScheduleList }) => {
                 <Text style={styles.scheduleTitle}>{item.title}</Text>
                 {differenceInDays(parseISO(item.end), parseISO(item.start)) ===
                 0 ? (
-                  <Text style={styles.scheduleTime}>{`${format(
-                    parseISO(item.start),
-                    'HH:mm'
-                  )} - ${format(parseISO(item.end), 'HH:mm')}`}</Text>
+                  item.allDay ? (
+                    <Text style={styles.scheduleTime}>하루종일</Text>
+                  ) : (
+                    <Text style={styles.scheduleTime}>
+                      {`${format(parseISO(item.start), 'HH:mm')} - ${format(
+                        parseISO(item.end),
+                        'HH:mm'
+                      )}`}
+                    </Text>
+                  )
+                ) : item.allDay ? (
+                  <Text style={styles.scheduleTime}>
+                    {`${format(parseISO(item.start), 'yyyy-MM-dd')} - ${format(
+                      parseISO(item.end),
+                      'yyyy-MM-dd'
+                    )} 하루종일`}
+                  </Text>
                 ) : (
-                  <Text style={styles.scheduleTime}>{`${format(
-                    parseISO(item.start),
-                    'yyyy-MM-dd HH:mm'
-                  )} - ${format(
-                    parseISO(item.end),
-                    'yyyy-MM-dd HH:mm'
-                  )}`}</Text>
+                  <Text style={styles.scheduleTime}>
+                    {`${format(
+                      parseISO(item.start),
+                      'yyyy-MM-dd HH:mm'
+                    )} - ${format(parseISO(item.end), 'yyyy-MM-dd HH:mm')}`}
+                  </Text>
                 )}
               </View>
             </TouchableOpacity>
@@ -310,7 +322,7 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   addButton: {
-    backgroundColor: '#87CEEB',
+    backgroundColor: '#ff7417',
     padding: 15,
     borderRadius: 50,
     justifyContent: 'center',
