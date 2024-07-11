@@ -3,7 +3,7 @@ import { ContentRoutes } from './routes';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { GRAY, PRIMARY } from '../colors';
 import DocumentScreen from '../screens/DocumentScreen'; // 오타 수정: DocumnetScreen -> DocumentScreen
-import BoardScreen from '../screens/BoardScreen';
+import NoticeScreen from '../screens/NoticeScreen';
 import ScheduleScreen from '../screens/ScheduleScreen';
 import HomeScreen from '../screens/HomeScreen';
 import OrgChartStack from './OrgChartStack';
@@ -33,7 +33,7 @@ const ContentDrawer = () => {
       />
       <Drawer.Screen
         name={ContentRoutes.BOARD}
-        component={BoardScreen}
+        component={NoticeScreen}
         options={{
           drawerIcon: props => getDrawerIcon({ ...props, name: 'clipboard' }), // 아이콘 이름 변경
         }}

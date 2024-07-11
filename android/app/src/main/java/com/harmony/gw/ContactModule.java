@@ -3,6 +3,8 @@ package com.harmony.gw;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.os.Bundle;
+import android.util.Log;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -44,6 +46,7 @@ public class ContactModule extends ReactContextBaseJavaModule {
 
         intent.putExtras(bundle);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Log.d("intent",intent.toString());
         reactContext.startActivity(intent);
     }
-}
+}a
