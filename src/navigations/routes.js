@@ -13,7 +13,7 @@ export const MainRoutes = {
 
 export const ContentRoutes = {
   HOME: 'Home',
-  BOARD: 'Board',
+  BOARD: 'Notice',
   DOCUMENT: 'Document',
   SCHEDULE: 'Schedule',
   ORGCHART: 'OrgChartStack',

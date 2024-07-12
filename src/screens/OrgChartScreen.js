@@ -137,7 +137,7 @@ export default function OrgChartScreen() {
               size={24}
               icon="folder"
               color="white"
-              style={{ backgroundColor: 'orange' }}
+              style={{ backgroundColor: '#3dadfc' }}
             />
           ) : (
             <Avatar.Icon

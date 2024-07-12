@@ -46,7 +46,7 @@ public class ContactModule extends ReactContextBaseJavaModule {
 
         intent.putExtras(bundle);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Log.d("intent",intent.toString());
+
         reactContext.startActivity(intent);
     }
-}a
+}

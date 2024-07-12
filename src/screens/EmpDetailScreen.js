@@ -94,7 +94,11 @@ const EmpDetailScreen = ({ route }) => {
         </View>
         <Text style={styles.title}>입사날짜</Text>
         <View style={styles.infoRow}>
-          <MaterialIcons name="calendar" size={24} color="orange" />
+          <MaterialCommunityIcons
+            name="calendar-account"
+            size={24}
+            color="orange"
+          />
           <Text style={styles.infoText}>{empData.hireDate}</Text>
         </View>
       </View>
