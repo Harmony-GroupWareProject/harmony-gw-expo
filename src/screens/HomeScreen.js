@@ -34,7 +34,6 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <View style={styles.calendarContainer}>
         <ScheduleListComponent
-          today={true}
           scheduleList={scheduleList}
           selectedDate={selectedDate}
           onEventPress={() => {}}

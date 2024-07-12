@@ -21,7 +21,15 @@ export default function ScheduleScreen() {
   const [loading, setLoading] = useState(false);
   const [isAddModalVisible, setAddModalVisible] = useState(false);
   const [isEditModalVisible, setEditModalVisible] = useState(false);
-  const [currentEvent, setCurrentEvent] = useState({});
+  const [currentEvent, setCurrentEvent] = useState({
+    allDay: false,
+    empNo: 'user',
+    end: '2024-07-01T17:00:00',
+    scheduleIdx: 1,
+    scheduleType: 2,
+    start: '2024-07-01T10:00:00',
+    title: 'Title 1',
+  });
 
   useFocusEffect(
     useCallback(() => {
@@ -88,7 +96,6 @@ export default function ScheduleScreen() {
         onDayPress={day => setSelectedDate(day.dateString)}
       />
       <ScheduleListComponent
-        today={false}
         scheduleList={scheduleList}
         selectedDate={selectedDate}
         onEventPress={handleEventPress}

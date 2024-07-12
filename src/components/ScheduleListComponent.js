@@ -7,11 +7,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { format, parseISO, differenceInDays, isWithinInterval } from 'date-fns';
+import {
+  format,
+  parseISO,
+  differenceInDays,
+  isWithinInterval,
+  isToday,
+} from 'date-fns';
 import randomColor from 'randomcolor';
 
 const ScheduleListComponent = ({
-  today,
   scheduleList,
   selectedDate,
   onEventPress,
@@ -34,7 +39,7 @@ const ScheduleListComponent = ({
     <View style={styles.container}>
       <ScrollView style={styles.scheduleList}>
         <Text style={styles.dateText}>
-          {today
+          {isToday(parseISO(selectedDate))
             ? `오늘일정`
             : `${format(parseISO(selectedDate), 'MM월 dd일')} 일정`}
         </Text>

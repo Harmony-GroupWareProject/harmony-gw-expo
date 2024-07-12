@@ -87,9 +87,15 @@ const EmpDetailScreen = ({ route }) => {
           <MaterialIcons name="work" size={24} color="orange" />
           <Text style={styles.infoText}>{empData.orgName}</Text>
         </View>
+        <Text style={styles.title}>직책</Text>
         <View style={styles.infoRow}>
           <MaterialIcons name="work" size={24} color="orange" />
           <Text style={styles.infoText}>{empData.position}</Text>
+        </View>
+        <Text style={styles.title}>입사날짜</Text>
+        <View style={styles.infoRow}>
+          <MaterialIcons name="calendar" size={24} color="orange" />
+          <Text style={styles.infoText}>{empData.hireDate}</Text>
         </View>
       </View>
     </View>
